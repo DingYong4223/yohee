@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_book_new_tab"
+        android:title="@string/dialog_open_new_tab"/>
+    <item
+        android:id="@+id/menu_book_new_bgtab"
+        android:title="@string/dialog_open_background_tab"/>
+    <item
+        android:id="@+id/menu_book_share"
+        android:title="@string/action_share"/>
+    <item
+        android:id="@+id/menu_book_copy_link"
+        android:title="@string/dialog_copy_link"/>
+    <item
+        android:id="@+id/menu_book_rm"
+        android:title="@string/remove_love"/>
+    <item
+        android:id="@+id/menu_edit_item"
+        android:title="@string/bookmark_edit_item"/>
+    <item
+        android:id="@+id/menu_edit_all"
+        android:title="@string/bookmark_edit_all"/>
+</menu>

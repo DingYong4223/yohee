@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/toolbar_height"
+    android:background="?attr/colorPrimaryTrans"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/button_back"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_array_left"/>
+
+    <ImageView
+        android:id="@+id/button_forward"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_array_right"/>
+
+    <ImageView
+        android:id="@+id/button_menu"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_tabs"/>
+
+    <ImageView
+        android:id="@+id/button_home"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_home"/>
+
+    <ImageView
+        android:id="@+id/button_page"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        app:srcCompat="@drawable/ic_muti_page"/>
+</LinearLayout>

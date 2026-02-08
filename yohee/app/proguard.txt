@@ -1,0 +1,95 @@
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
+
+#keep line, don's show class name
+-renamesourcefileattribute
+-keepattributes SourceFile,LineNumberTable
+-keepattributes *Annotation*
+-keepattributes JavascriptInterface
+
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+
+#self defined view, used in xml file.
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+#native keep
+#-keepclasseswithmembernames class * {
+#    native <methods>;
+#}
+
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** w(...);
+    public static *** i(...);
+}
+
+-assumenosideeffects class com.fula.CLog {
+    public static *** i(...);
+    public static *** track(...);
+}
+
+#event bus keep
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+# Without this rule, openFileChooser does not get called on KitKat
+-keep class com.fula.yohee.view.YoheeChromeClient {
+    void openFileChooser(android.webkit.ValueCallback);
+    void openFileChooser(android.webkit.ValueCallback, java.lang.String);
+    void openFileChooser(android.webkit.ValueCallback, java.lang.String, java.lang.String);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+-dontwarn android.support.**
+-dontwarn net.i2p.crypto.CertUtil
+-dontwarn org.apache.http.conn.ssl.DefaultHostnameVerifier
+-dontwarn org.apache.http.HttpHost
+
+# Needed for okhttp
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.ParametersAreNonnullByDefault
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontwarn org.conscrypt.**
+# A resource is loaded with a relative path so the package of this class must be preserved.
+#-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+
+-keepclassmembers class * {
+@android.webkit.JavascriptInterface <methods>;
+}
+
+#-keepclassmembers class * extends com.fula.yohee.jsapi.JsEventBase {
+#    public <init>(android.app.Activity, android.webkit.WebView);
+#}
+
+-keepclassmembers class * {
+    public <init>(android.app.Activity, android.webkit.WebView);
+}
+
+-dontwarn com.google.**
+-dontwarn androidx.**
+#-keep class androidx.appcompat.widget.** {*;}
+-keepclassmembers class androidx.appcompat.widget.** {
+    private <fields>;
+}

@@ -1,0 +1,3 @@
+call gradlew clean
+call gradlew resguardYoheeLiteRelease
+pause

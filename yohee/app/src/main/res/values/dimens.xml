@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="toolbar_height">45dp</dimen>
+    <dimen name="toolbar_progress_height">1dp</dimen>
+    <dimen name="menubar_height">38dp</dimen>
+
+    <dimen name="navigation_width">260dp</dimen>
+    <dimen name="dialog_padding">14dp</dimen>
+    <dimen name="default_padding">8dp</dimen>
+    <dimen name="extra_padding">16dp</dimen>
+    <dimen name="bookmark_item_icon_size">26dp</dimen>
+    <dimen name="captrue_width">120dp</dimen>
+    <dimen name="captrue_height">90dp</dimen>
+
+    <dimen name="setting_item_height">45dp</dimen>
+    <dimen name="sheet_item_padding_ud">10dp</dimen>
+    <dimen name="dlg_padding_lr">5dp</dimen>
+    <dimen name="bottom_menu_height">40dp</dimen>
+    <dimen name="losttabs_tip_height">40dp</dimen>
+    <dimen name="losttabs_opentxt_width">60dp</dimen>
+</resources>

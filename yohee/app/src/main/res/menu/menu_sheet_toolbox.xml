@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tb_action_find"
+        android:icon="@drawable/ic_find"
+        android:title="@string/action_find"/>
+    <item
+        android:id="@+id/tb_action_media"
+        android:icon="@drawable/ic_leida"
+        android:title="@string/media_find"/>
+    <item
+        android:id="@+id/tb_action_adblock_list"
+        android:icon="@drawable/ic_adblock"
+        android:title="@string/block_ads_manage"/>
+    <item
+        android:id="@+id/tb_action_offline"
+        android:icon="@drawable/ic_offweb"
+        android:title="@string/offpage"/>
+</menu>

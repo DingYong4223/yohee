@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000">
+
+    <RelativeLayout
+        android:id="@+id/switcher_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_menu_height"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/switcher_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            android:background="@color/transparent"
+            android:contentDescription="@null"
+            app:srcCompat="@drawable/ic_add_page">
+        </ImageButton>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tab_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/switcher_header"
+        android:layout_alignParentTop="true"/>
+</RelativeLayout>

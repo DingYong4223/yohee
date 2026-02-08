@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="en-us" http-equiv="Content-Language" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <style type="text/css">
+        body{background-color:rgba(0,0,0,0.0);text-align: center;margin: 0px;}
+        input:focus{outline: none;}
+        #search_input{height: 35px;width: 100%;border: 1px solid #7F7F7F;font-size: 16px;background-color: #FFF;}
+        span {display: block;overflow: hidden;vertical-align: middle;}
+        .search_bar{display: table;vertical-align: middle;width: 90%;height: 35px;max-width: 500px;margin: 0 auto;font-family: Arial;color: #444;-moz-border-radius: 2px;-webkit-border-radius: 2px;}
+        #search_submit{width: 80px;height: 39px;float: right;color: #38f;font-size: 16px;font-weight: bold;border: 1px solid #7F7F7F;background-color: #FAFAFA;}
+        .outer{display: table;position: absolute;height: 100%;width: 100%;}
+        .inner{margin-left: auto;margin-right: auto;margin-top: 5%;margin-bottom: 1%;width: 100%;}
+        .mark_tip_holder{height: 20px;margin-left: 2%;padding: 0.1%;}
+        #mark_tip{margin-left: 5px;}
+        .floatLeft{float: left;}
+        img.smaller{width: 30%;max-width: 150px;}
+        .box{vertical-align: middle;position: relative;display: block;margin: 10px;padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;background-color: #fff;box-shadow: 0px 3px rgba(0, 0, 0, 0.1);font-family: Arial;color: #444;font-size: 12px;-moz-border-radius: 2px;-webkit-border-radius: 2px;border-radius: 2px;}
+        #flex-holder{width: 96%;margin: 0 auto;display:flex;flex-direction: row;align-items:baseline;flex-wrap: wrap;}
+        #flex-holder a{display: block;background-color:#ccc;border-radius:10px;margin: 1% 0.5%;padding:1% 0.5%;font-size:13px;width: 23%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+        #img_pin{width: 16px; height: 18px;}
+        a{text-decoration:none}
+        a:visited{color:blue;}
+        .animMarkIn{animation: markIn 1s 1 ease-in-out;}
+        @keyframes markIn {${MARK_ANIM}}
+    </style>
+
+</head>
+
+<body>
+    <div class="outer">
+        <div class="inner">
+            <img id="image_url" class="smaller" src=""/>
+            </br>
+            <form onsubmit="return search()" class="search_bar">
+                <input type="submit" id="search_submit" value=""/>
+                <span>
+                    <input class="search" type="text" id="search_input" baiduSug=2 />
+                </span>
+            </form>
+            </br>
+        </div>
+        <div class="mark_tip_holder floatLeft">
+            <img class="floatLeft" id="img_pin" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+            AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElN
+            RQfjBBcJGyoZFjOpAAACMklEQVRIx9XU3WvOcRjH8ZenQtvYlhMP5Sm0IQ8zhpCQHJC1UPKQA8kB
+            pZQDWsqf4AzlTCEHQpmjLQ95GiJyYMU29mTbPe6x3bOfg/36ddt+7ns7ks/R77o+vbuu7/X9/i7+
+            F+U544127artN2akeLE6gWcuuOStQJWckeCLtUjYFkajHNHnyvDxJVollP2RqxRYMzx8qTadVg3K
+            5vjh/HDw5b7qUBrjvFKVHS/RrsOKWK/FzWx4qQ7tSmK9YoHKzPgqnb5aFuuNV+2nmZnwMgltloKN
+            qhWkeRPcFTieCV+jS6slYLNu70yNvInuZWt/k6RG88FOPV6aEnl5Huh3IhO+WXeEl+v1RH4a/lC/
+            I5nwDb5rthBs1+NVWvUcNYKw+iz74vDVkpoUR83XKoy8XPf1OwZm+6jbtMH4DE2aFYEKvZ6lzX6g
+            +aNgjk9+2Dq0/mWp8JfZI+WxyZEzySO/HAZz1eu2ZSheKOViOMY+j0yKnMke++UQmKdB0qa48+8S
+            2ABq1cmL8vme6nMAzNcoaWP8/E8JFGKclLNRtsBzffaCBT77HhaJ0WmBXNASHoVCL6TsBkW++Gbd
+            31/AfkH4eC9IOWiKMq/1qgDFmnRZK4Om63cO5LgmEAjUh5e1ULNE9hV2S5fp4XepY3aEm3dgpZZl
+            w1kk6Una7Q+oRKtOK7PjUK7He9uNDuNcJyW1xe7Ev2i9DwINrrvqtqRATebNw6hB8Vg7VSgyUUKt
+            G+4Mv/q/0m/0JKwLwLpKdQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOS0wNC0yM1QwOToyNzo0Misw
+            MzowMPzLLLUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTktMDQtMjNUMDk6Mjc6NDIrMDM6MDCNlpQJ
+            AAAAAElFTkSuQmCC"/>
+            <span id="mark_tip" class="floatLeft">Common Marks</span>
+        </div>
+        <div id="flex-holder"/>
+    </div>
+    <script type="text/javascript">
+        function search() {
+            var si = document.getElementById("search_input");
+            if (si.value != "") {
+                window.location.href = "${BASE_URL}" + si.value;
+            }
+            return false;
+        }
+    </script>
+</body>
+
+</html>

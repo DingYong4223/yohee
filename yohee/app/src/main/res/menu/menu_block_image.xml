@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_block_image_wap"
+        android:title="@string/block_image_wap"/>
+    <item
+        android:id="@+id/menu_block_image_all"
+        android:title="@string/block_image_all"/>
+    <item
+        android:id="@+id/menu_block_image_cancel"
+        android:title="@string/action_cancel"/>
+</menu>

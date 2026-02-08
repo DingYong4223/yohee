@@ -1,0 +1,257 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'AndResGuard'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath("com.tencent.mm:AndResGuard-gradle-plugin:${project.ANDRESGUARD_VERSION}") { changing = true }
+    }
+
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+android {
+    compileSdkVersion project.targetSdkVersion
+    buildToolsVersion project.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionName project.versionName
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    signingConfigs {
+        yohee {
+            storeFile file("fula.jks")
+            storePassword "love0114"
+            keyAlias "fula"
+            keyPassword "love881218"
+        }
+    }
+
+    buildTypes {
+        debug {
+            multiDexEnabled true
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            testCoverageEnabled true
+        }
+
+        release {
+            signingConfig signingConfigs.yohee
+            multiDexEnabled false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles 'proguard.txt'
+            testCoverageEnabled false
+        }
+    }
+
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
+
+    flavorDimensions "capabilities"
+
+    productFlavors {
+        yoheeLite {
+            dimension "capabilities"
+            applicationId "com.fula.yohee"
+            versionCode versionCode
+        }
+    }
+
+    sourceSets {
+        yoheeLite.setRoot('src/yoheeLite')
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    lintOptions {
+        abortOnError true
+    }
+
+    packagingOptions {
+        exclude '.readme'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+jacoco {
+    toolVersion = '0.7.9' // See http://www.eclemma.org/jacoco/
+}
+
+dexcount {
+    includeClasses = false
+    includeFieldCount = false
+    format = "tree"
+    orderByMethodCount = true
+    verbose = false
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':frame')
+    implementation project(':gsyVideoPlayer-java')
+    implementation project(':yano')
+    implementation project(':floatbutton')
+    kapt project(':yano-compiler')
+
+    //implementation files('libs/protobuf-java-3.0.0.jar')
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.assertj:assertj-core:3.15.0'
+    testImplementation 'org.mockito:mockito-core:3.3.0'
+    testImplementation 'com.nhaarman:mockito-kotlin:1.6.0', {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testImplementation 'org.robolectric:robolectric:4.3.1'
+
+    // support libraries
+//    implementation "androidx.palette:palette:1.0.0"
+    implementation "androidx.palette:palette-ktx:1.0.0"
+    //implementation "androidx.vectordrawable:vectordrawable-animated:1.0.0"
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.fragment:fragment-ktx:1.2.2'
+    implementation "androidx.drawerlayout:drawerlayout:1.0.0"
+
+    // html parsing for menu_android_reading mode
+    implementation 'org.jsoup:jsoup:1.13.1'
+
+    // dependency injection
+    final def daggerVersion = '2.26'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    //compileOnly 'javax.annotation:jsr250-api:1.0'
+
+    // proxy support
+//    implementation 'net.i2p.android:client:0.8'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+
+    // rx
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.18'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+
+//    // tor proxy
+//    final def netCipherVersion = '2.0.0-alpha1'
+//    implementation "info.guardianproject.netcipher:netcipher:$netCipherVersion"
+//    implementation "info.guardianproject.netcipher:netcipher-webkit:$netCipherVersion"
+
+    // memory leak analysis
+    final def leakCanaryVersion = '2.2'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    //releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3"
+
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation 'androidx.core:core-ktx:1.2.0'
+
+    //implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'com.androidkun:XTabLayout:1.1.4'
+    implementation 'org.greenrobot:eventbus:3.2.0'
+    //FlexboxLayout
+    //implementation 'com.google.android:flexbox:1.0.0'
+    //implementation 'com.shuyu:gsyVideoPlayer-java:7.0.1'
+    compileOnly 'com.github.NanoHttpd.nanohttpd:nanohttpd:master'
+
+    //Flurry, Recommended to add Google Play Services
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-ads:15.0.1'
+    //Flurry, Required for Flurry Analytics integration
+    implementation 'com.flurry.android:analytics:11.4.0@aar'
+    //implementation 'com.liulishuo.filedownloader:library:1.7.4'
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.4'
+}
+
+kapt {
+    arguments {
+        arg("yano.projectPath", project.rootDir)
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        kotlinOptions {
+            freeCompilerArgs += ['-XXLanguage:+InlineClasses']
+            freeCompilerArgs += ['-progressive']
+        }
+    }
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testYoheeLiteDebugUnitTest', 'createYoheeLiteDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    final def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    final def debugTree = fileTree(dir: "$buildDir/intermediates/classes/YoheeLite/debug", excludes: fileFilter)
+    final def kotlinDebugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/YoheeLiteDebug", excludes: fileFilter)
+    final def mainSrc = "${project.projectDir}/src/test/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree], [kotlinDebugTree])
+    executionData = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testYoheeLiteDebugUnitTest.exec",
+            "outputs/code-coverage/connected/*coverage.ec"
+    ])
+}
+
+//--------------------------------------------------------
+andResGuard {
+    mappingFile = file("./resource_mapping.txt")
+    use7zip = true
+    useSign = true
+    keepRoot = false
+    mergeDuplicatedRes = true
+    // add <yourpackagename>.R.drawable.icon into whitelist.
+    // because the launcher will get the icon with his name
+    whiteList = ["R.mipmap.ic_launcher",
+                 "R.string.com.crashlytics.*",
+                 "R.id.*"]
+    compressFilePattern = ["*.png",
+                           "*.jpg",
+                           "*.jpeg",
+                           "*.gif",
+                           "resources.arsc"]
+    sevenzip {
+        artifact = "com.tencent.mm:SevenZip:${project.ANDRESGUARD_SEVENZIP_VERSION}"
+        //path = "/usr/local/bin/7za"
+    }
+
+    /**
+     * Optional: if finalApkBackupPath is null, AndResGuard will overwrite final apk
+     * to the path which assemble[Task] write to*/
+    finalApkBackupPath = "${project.rootDir}/final.apk"
+    digestalg = "SHA-256"
+}

@@ -1,0 +1,34 @@
+//https://developers.google.com/protocol-buffers/docs/javatutorial
+
+syntax = "proto3";
+
+package base;
+option java_package = "com.fula.yohee.pb";
+//option java_outer_classname = "Test";
+//option optimize_for = CODE_SIZE; //LITE_RUNTIME
+option optimize_for = LITE_RUNTIME;
+
+message BookMark {
+	message Item {
+		string title      = 1;  //title
+		string url        = 2;  //url
+		string folder     = 3;  //folder
+		uint32 position   = 4;  //position
+		uint32  type      = 5;   //type, 0:bookmark, 1:pagemark
+	}
+	repeated Item data = 1; //the bookmark items array.
+}
+
+message History {
+	message Item {
+		string title      = 1;  //title
+		string url        = 2;  //link url
+		uint64 time       = 3;  //time
+	}
+	repeated Item data = 1; //the history items array.
+}
+
+message UserPrefer {
+	map<string, uint32> settings = 1;
+	string host        = 2;  //proxy host
+}

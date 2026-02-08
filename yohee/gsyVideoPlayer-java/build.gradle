@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion project.compileSdkVersion
+    buildToolsVersion project.buildToolsVersion
+    defaultConfig {
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation androidDependencies.appcompat_v7
+//
+//    def viewDependencies = rootProject.ext.viewDependencies
+//    api viewDependencies.ijkplayer_java
+//    api viewDependencies.ijkplayer_exo
+//    api viewDependencies.transitionseverywhere
+//    //api project(':gsyVideoPlayer-proxy_cache')
+//    //api project(':gsyVideoPlayer-base')
+//    api "com.shuyu:gsyVideoPlayer-base:$gsyVideoVersion"
+//    api "com.shuyu:gsyvideoplayer-androidvideocache:$gsyVideoVersion"
+    implementation project(':frame')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "com.shuyu:gsyvideoplayer-androidvideocache:7.0.1"
+    api "tv.danmaku.ijk.media:ijkplayer-java:0.8.8"
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="colorPrimaryTrans" format="reference|color" />
+    <attr name="colorPrimaryDarkTrans" format="reference|color" />
+    <attr name="numberColor" format="reference|color" />
+    <attr name="autoCompleteTitleColor" format="reference|color" />
+    <attr name="autoCompleteUrlColor" format="reference|color" />
+    <attr name="progressBackgroundColor" format="color" />
+    <attr name="searchBackground" format="reference|color" />
+    <attr name="textColorPrimary" format="reference|color" />
+    <attr name="textColorHint" format="reference|color" />
+    <attr name="toolbarSettingsBackground" format="reference|color" />
+    <attr name="drawerBackground" format="reference|color" />
+    <attr name="dividerColor" format="reference|color" />
+    <attr name="textColorWhite" format="reference|color" />
+    <attr name="layoutBgLightDark" format="reference|color" />
+    <attr name="layoutBgDark" format="reference|color" />
+
+</resources>

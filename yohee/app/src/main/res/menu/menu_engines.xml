@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_google"
+        android:icon="@mipmap/icon_google"
+        android:title="@string/search_engine_google"/>
+    <item
+        android:id="@+id/menu_baidu"
+        android:icon="@mipmap/icon_baidu"
+        android:title="@string/search_engine_baidu"/>
+    <item
+        android:id="@+id/menu_yahoo"
+        android:icon="@mipmap/icon_yahoo"
+        android:title="@string/search_engine_yahoo"/>
+    <item
+        android:id="@+id/menu_sogou"
+        android:icon="@mipmap/icon_sogou"
+        android:title="@string/search_engine_sogou"/>
+</menu>

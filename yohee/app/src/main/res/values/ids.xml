@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="night_id" type="id"/>
+    <item name="TAG_KEY_GROUP" type="id"/>
+    <item name="TAG_KEY_ITEM" type="id"/>
+</resources>

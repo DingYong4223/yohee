@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_action_copy"
+        android:icon="@drawable/ic_copy"
+        android:title="@string/dialog_copy_link"/>
+    <item
+        android:id="@+id/menu_action_share"
+        android:icon="@drawable/ic_share"
+        android:title="@string/action_share"/>
+    <item
+        android:id="@+id/menu_action_share_pic"
+        android:icon="@drawable/ic_pic_share"
+        android:title="@string/action_share_pic"/>
+    <item
+        android:id="@+id/menu_action_find"
+        android:icon="@drawable/ic_find"
+        android:title="@string/action_find"/>
+    <item
+        android:id="@+id/menu_action_offpage"
+        android:icon="@drawable/ic_offweb"
+        android:title="@string/save_page"/>
+</menu>
