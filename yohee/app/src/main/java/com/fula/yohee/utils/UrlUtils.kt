@@ -27,7 +27,7 @@ import androidx.annotation.Nullable
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.fula.CLog
-import com.fula.yohee.BuildConfig
+// import com.fula.yohee.BuildConfig
 import com.fula.yohee.constant.FILE
 import com.fula.yohee.database.DownloadEntry
 import com.fula.yohee.extensions.snackbar
@@ -37,7 +37,6 @@ import java.io.File
 import java.net.URISyntaxException
 import java.util.*
 import java.util.regex.Pattern
-
 
 /**
  * Utility methods for URL manipulation.
@@ -238,7 +237,7 @@ object UrlUtils {
         val newMimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(Utils.getFileExtension(file.toString()))
         val intent = Intent(Intent.ACTION_VIEW)
         intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        val contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileprovider", file)
+        val contentUri = FileProvider.getUriForFile(context, "com.fula.yohee.fileprovider", file)
         intent.setDataAndType(contentUri, newMimeType)
         try {
             context.startActivity(intent)

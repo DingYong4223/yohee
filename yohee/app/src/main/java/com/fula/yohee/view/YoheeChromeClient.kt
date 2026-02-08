@@ -50,7 +50,7 @@ class YoheeChromeClient(
 
     override fun onReceivedIcon(view: WebView, icon: Bitmap) {
         CLog.i("receive icon...")
-        webViewController.updateWebInfo(view.url, icon)
+        view.url?.let { webViewController.updateWebInfo(it, icon) }
         cacheFavicon(view.url, icon)
     }
 

@@ -10,7 +10,7 @@ import com.fula.yohee.constant.Setting
 import com.fula.yohee.extensions.inflater
 import com.fula.yohee.extensions.removeFromParent
 import com.fula.yohee.utils.DeviceUtils
-import kotlinx.android.synthetic.main.layout_fullscreen_pop.view.*
+// import kotlinx.android.synthetic.main.layout_fullscreen_pop.view.*
 
 /**
  * red point helper to draw point on ui control.
@@ -33,7 +33,8 @@ class FullscreenWidget(mContext: Context, val floatMenu: FloatMenuWidget, privat
     /**判断是否折叠收起状态*/
     fun getIsCollaps(): Boolean {
         popupWindow.apply {
-            return contentView.bottom_view_holder.visibility == View.GONE
+            val bottomViewHolder = contentView.findViewById<View>(R.id.bottom_view_holder)
+            return bottomViewHolder.visibility == View.GONE
         }
     }
 
@@ -42,17 +43,19 @@ class FullscreenWidget(mContext: Context, val floatMenu: FloatMenuWidget, privat
         popupWindow.apply {
             contentView.apply {
                 val holderW = DeviceUtils.getScreenWidth(mContext) - mContext.resources.getDimension(R.dimen.toolbar_height)
-                CLog.i("fuw = ${fulls_switch.width}")
-                bottom_view_holder.addView(holderView.apply {
+                val fullsSwitch = findViewById<View>(R.id.fulls_switch)
+                val bottomViewHolder = findViewById<View>(R.id.bottom_view_holder)
+                CLog.i("fuw = ${fullsSwitch.width}")
+                bottomViewHolder.addView(holderView.apply {
                     removeFromParent()
                     layoutParams.apply {
                         width = holderW.toInt()
                     }
                 })
-                fulls_switch.setOnClickListener {
+                fullsSwitch.setOnClickListener {
                     switchCollapse()
                 }
-                initViewState(bottom_view_holder, false)
+                initViewState(bottomViewHolder, false)
             }
             showAtLocation(anchor, Gravity.END or Gravity.BOTTOM, 0, 0)
             Setting.applyModeToView(mContext, contentView.parent as View)
@@ -62,7 +65,8 @@ class FullscreenWidget(mContext: Context, val floatMenu: FloatMenuWidget, privat
 
     fun switchCollapse() {
         popupWindow.contentView.apply {
-            initViewState(bottom_view_holder, bottom_view_holder.visibility != View.VISIBLE)
+            val bottomViewHolder = findViewById<View>(R.id.bottom_view_holder)
+            initViewState(bottomViewHolder, bottomViewHolder.visibility != View.VISIBLE)
         }
     }
 

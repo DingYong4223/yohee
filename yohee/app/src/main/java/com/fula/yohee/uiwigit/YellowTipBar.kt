@@ -7,6 +7,8 @@ import android.os.Handler
 import android.os.Message
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fula.CLog
 import com.fula.view.BottomDrawer
@@ -21,15 +23,10 @@ import com.fula.yohee.ui.activity.WebActivity
 import com.fula.yohee.ui.page.SettingAdapter
 import com.fula.yohee.utils.DrawableUtils
 import com.fula.yohee.utils.UrlUtils
-import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_yellow_tip.view.*
-import kotlinx.android.synthetic.main.main_bottom_drawer.*
-import kotlinx.android.synthetic.main.main_bottombar.*
+import java.lang.ref.WeakReference
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.lang.ref.WeakReference
 
 class YellowTipBar(val context: WebActivity, val rootView: FrameLayout) {
 
@@ -43,23 +40,26 @@ class YellowTipBar(val context: WebActivity, val rootView: FrameLayout) {
         fp = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT).apply {
             topMargin = context.toolbarAdapter.getToolbarHeight().toInt()
         }
+        val yellowContent = yellowBar.findViewById<TextView>(R.id.yellow_content)
+        val yellowAction = yellowBar.findViewById<TextView>(R.id.yellow_action)
+        val ltClose = yellowBar.findViewById<ImageView>(R.id.lt_close)
         rootView.addView(yellowBar.apply {
             removeFromParent()
-            yellow_content.text = content
+            yellowContent.text = content
             if (action.isNullOrEmpty()) {
-                yellow_action.visibility = View.GONE
-                yellow_action.text = ""
+                yellowAction.visibility = View.GONE
+                yellowAction.text = ""
             } else {
-                yellow_action.visibility = View.VISIBLE
-                yellow_action.text = action
+                yellowAction.visibility = View.VISIBLE
+                yellowAction.text = action
             }
-            this.yellow_action.setOnClickListener {
+            yellowAction.setOnClickListener {
                 CLog.i("lt_open clicked...")
                 handler.removeMessages(MSG_DISMISS_YELLOWBAR)
                 yellowBar.removeFromParent()
                 actListener?.invoke()
             }
-            this.lt_close.setOnClickListener {
+            ltClose.setOnClickListener {
                 handler.removeMessages(MSG_DISMISS_YELLOWBAR)
                 yellowBar.removeFromParent()
             }

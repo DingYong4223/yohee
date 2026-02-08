@@ -6,7 +6,18 @@
       <GradleProjectSettings>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="jbr-21" />
+        <option name="gradleJvm" value="corretto-17" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/floatbutton" />
+            <option value="$PROJECT_DIR$/frame" />
+            <option value="$PROJECT_DIR$/gsyVideoPlayer-java" />
+            <option value="$PROJECT_DIR$/yano" />
+            <option value="$PROJECT_DIR$/yano-compiler" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

@@ -91,7 +91,7 @@ open class YoheeWebClient(private val activity: WebActivity, private val wContro
         if (URLUtil.isHttpUrl(url) || URLUtil.isHttpsUrl(url)) {
             if (activity.userPrefer.autoMediaDetect) {
                 activity.runOnUiThread {
-                    activity.detectMediaUrl(url, if (view.title.isNullOrEmpty()) "untitled" else view.title)
+                    activity.detectMediaUrl(url, view.title ?: "untitled")
                 }
             }
         }
@@ -103,7 +103,7 @@ open class YoheeWebClient(private val activity: WebActivity, private val wContro
     override fun onPageFinished(view: WebView, url: String) {
         CLog.i("page finished...")
         wController.onPageFinished(view, url)
-        wController.updateWebInfo(url, if (view.title.isNullOrEmpty()) url else view.title)
+        wController.updateWebInfo(url, view.title ?: url)
 
         if (activity.isTabFront(wController) && wController.showingWebView == view) {
             activity.onPageFinished(view, url, adBlockList)
@@ -192,7 +192,7 @@ open class YoheeWebClient(private val activity: WebActivity, private val wContro
 
     override fun onReceivedSslError(webView: WebView, handler: SslErrorHandler, error: SslError) {
         CLog.i("receive ssl error: ${webView.url}")
-        activity.invalideSslHost.add(UrlUtils.getHost(webView.url))
+        webView.url?.let { activity.invalideSslHost.add(UrlUtils.getHost(it)) }
         sslState = SSLState(SSLState.STATE_INVALIDE, webView.url, error)
         handler.proceed()
         if (activity.isTabFront(wController)) {

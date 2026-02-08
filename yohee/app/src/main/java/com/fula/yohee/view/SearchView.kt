@@ -11,7 +11,7 @@ import androidx.core.graphics.plus
 import com.fula.yohee.extensions.execIf
 
 
-class SearchView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = com.fula.yohee.R.attr.autoCompleteTextViewStyle)
+class SearchView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = android.R.attr.autoCompleteTextViewStyle)
     : AppCompatAutoCompleteTextView(context, attrs, defStyleAttr) {
 
     interface FocusListener {

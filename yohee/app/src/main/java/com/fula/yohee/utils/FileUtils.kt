@@ -20,7 +20,7 @@ import androidx.core.content.FileProvider
 import com.fula.CLog
 import com.fula.permission.PermissionsManager
 import com.fula.permission.PermissionsResultAction
-import com.fula.yohee.BuildConfig
+// import com.fula.yohee.BuildConfig
 import com.fula.yohee.YoheeApp
 import com.fula.yohee.constant.Setting
 import com.fula.yohee.extensions.tryUse
@@ -28,14 +28,13 @@ import io.reactivex.Completable
 import java.io.*
 import java.util.*
 
-
 /**
  * A utility class containing helpful methods
  * pertaining to file storage.
  */
 object FileUtils {
 
-    private val APP_ROOT = "${if (BuildConfig.DEBUG) "" else "."}com.fula.yohee"
+    private val APP_ROOT = ".com.fula.yohee"
     const val DOWNLOAD_WEB = "Download/web"
     const val DOWNLOAD_FILE = "Download/file"
     const val SAVEPATH = "Save"
@@ -111,7 +110,7 @@ object FileUtils {
             val dialog = AlertDialog.Builder(context).setTitle(title)
                     .setIcon(android.R.drawable.ic_dialog_alert).setMessage(msg)
                     .setPositiveButton(com.fula.yohee.R.string.action_ok, null).show()
-            Setting.applyModeToWindow(context, dialog.window)
+            dialog.window?.let { Setting.applyModeToWindow(context, it) }
             Setting.setDialogSize(context, dialog.window)
             return false
         }
@@ -204,10 +203,6 @@ object FileUtils {
     fun writeCrashToStorage(throwable: Throwable) = writeExceptionToDisk(throwable)
 
     fun writeExceptionToDisk(throwable: Throwable, fn: String? = null) {
-        if (BuildConfig.DEBUG) {
-            CLog.i("+++write exception to file+++")
-            throwable.printStackTrace()
-        }
         PermissionsManager.requestPermissionsIfNecessaryForResult(YoheeApp.mainActivity, YoheePermission.STORAGE_READ_WRITE, object : PermissionsResultAction() {
             override fun onGranted() {
                 val fileName = fn
@@ -273,8 +268,8 @@ object FileUtils {
             if (isQQMediaDocument(uri)) {
                 val path = uri.path
                 val fileDir = Environment.getExternalStorageDirectory()
-                val file = File(fileDir, path.substring("/QQBrowser".length))
-                return if (file.exists()) file.toString() else null
+                val file = path?.let { File(fileDir, it.substring("/QQBrowser".length)) }
+                return file?.let { if (it.exists()) it.toString() else null } ?: null
             }
 
             return getDataColumn(context, uri, null, null)

@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
 import com.fula.CLog
-import com.fula.frame.BuildConfig
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -14,8 +13,10 @@ import java.io.IOException
 
 object DebugHelper {
 
+    private const val DEBUG = false
+
     fun saveBitmapImage(bm: Bitmap) {
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             CLog.i("保存图片")
             val f = File(Environment.getExternalStorageDirectory(), "$bm.png")
             if (f.exists()) {
@@ -36,7 +37,7 @@ object DebugHelper {
     }
 
     fun notifyFileChanged(context: Context, path: String) {
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
             val contentUri = Uri.parse (path)
             mediaScanIntent.data = contentUri

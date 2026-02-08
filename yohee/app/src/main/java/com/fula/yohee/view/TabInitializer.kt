@@ -66,7 +66,7 @@ abstract class HtmlInitializer(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     CLog.i("onSuccess webview = $webView, url = $it")
-                    webView?.loadUrl(it, headers)
+                    webView?.loadUrl(it, headers ?: emptyMap())
                 }) {}
     }
 }

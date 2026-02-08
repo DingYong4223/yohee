@@ -69,9 +69,11 @@ object WebUtils {
         var title = webView.title
         dis?.dispose()
         dis = Single.fromCallable {
-            if (title.length > FILE_NAME_MAX_LENGTH) title = title.substring(title.length - FILE_NAME_MAX_LENGTH)
-            if (title.contains(File.separator)) {
-                title = title.substring(title.lastIndexOf(File.separator))
+            title?.let {
+                if (it.length > FILE_NAME_MAX_LENGTH) title = it.substring(it.length - FILE_NAME_MAX_LENGTH)
+                if (it.contains(File.separator)) {
+                    title = it.substring(it.lastIndexOf(File.separator))
+                }
             }
             var stringBuilder = StringBuilder()
             stringBuilder.append(title).append(".mht")

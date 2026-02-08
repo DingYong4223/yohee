@@ -16,7 +16,7 @@ class BackgroundDrawable(
     context: Context
 ) : TransitionDrawable(
     arrayOf<Drawable>(
-        ColorDrawable(ContextCompat.getColor(context, R.color.transparent)),
+        ColorDrawable(Color.TRANSPARENT),
         ColorDrawable(Color.RED)
     )
 ) {
