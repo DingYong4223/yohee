@@ -192,7 +192,7 @@ class YoheePresenter(
                                 if (null != select && select) {
                                     deleteBookmark(it.url, if (item.id == R.id.menu_item_add_book) Bookmark.TYPE_BOOK else Bookmark.TYPE_MARK)
                                 } else {
-                                    addBookMark(it.url, it.showingWebView.title, "", if (item.id == R.id.menu_item_add_book) Bookmark.TYPE_BOOK else Bookmark.TYPE_MARK)
+                                    addBookMark(it.url ?: "", it.showingWebView.title ?: "", "", if (item.id == R.id.menu_item_add_book) Bookmark.TYPE_BOOK else Bookmark.TYPE_MARK)
                                 }
                             }
                         }

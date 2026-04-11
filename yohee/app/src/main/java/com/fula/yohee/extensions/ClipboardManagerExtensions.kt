@@ -9,10 +9,10 @@ import com.fula.yohee.R
  * Copies the [text] to the clipboard with the label `URL`.
  */
 fun ClipboardManager.copy(text: String) {
-    primaryClip = ClipData.newPlainText("URL", text)
+    setPrimaryClip(ClipData.newPlainText("URL", text))
 }
 
 fun ClipboardManager.copyAndTip(context: Activity, text: String) {
-    primaryClip = ClipData.newPlainText("URL", text)
+    setPrimaryClip(ClipData.newPlainText("URL", text))
     context.shortToast(context.getString(R.string.copyed_to_clip, text))
 }

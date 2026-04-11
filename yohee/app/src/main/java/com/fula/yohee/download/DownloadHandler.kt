@@ -179,7 +179,7 @@ class DownloadHandler @Inject constructor() : DownloadListener {
                         CLog.i("get header mimetype = $mimeType")
                         val contentDisposition = it["Content-Disposition"]?.toString()
                         if (mimeType.equals(FileUtils.MIMETYPE_TEXT_PLAIN, ignoreCase = true) || mimeType.equals(FileUtils.MIMETYPE_APPLICATION_OCTET_STREAM, ignoreCase = true)) {
-                            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(Utils.getFileExtension(url))
+                            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(Utils.getFileExtension(url)) ?: mimeType
                         }
                         val filename = UrlUtils.guessFileName(url, contentDisposition, mimeType)
                         CLog.i("filename = $filename")

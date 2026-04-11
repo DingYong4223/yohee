@@ -74,8 +74,8 @@ object DialogHelper {
             setPositiveButton(positiveButton.title) { _, _ -> positiveButton.onClick() }
         }.create()
         dialog.apply {
-            Setting.applyModeToWindow(activity, dialog.window)
-            setDialogSize(activity, window)
+            Setting.applyModeToWindow(activity, dialog.window!!)
+            setDialogSize(activity, window!!)
         }.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(positiveButton.colorTint)
     }
@@ -107,8 +107,8 @@ object DialogHelper {
             setNegativeButton(cancelItem.title) { _, _ -> cancelItem.onClick() }
         }.create()
         dialog.apply {
-            Setting.applyModeToWindow(activity, dialog.window)
-            setDialogSize(activity, window)
+            Setting.applyModeToWindow(activity, dialog.window!!)
+            setDialogSize(activity, window!!)
         }.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(positiveButton.colorTint)
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(cancelItem.colorTint)
@@ -136,8 +136,8 @@ object DialogHelper {
             setNegativeButton(cancelItem.title) { _, _ -> cancelItem.onClick() }
         }.create()
         dialog.apply {
-            Setting.applyModeToWindow(activity, dialog.window)
-            setDialogSize(activity, window)
+            Setting.applyModeToWindow(activity, dialog.window!!)
+            setDialogSize(activity, window!!)
         }.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(positiveButton.colorTint)
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(cancelItem.colorTint)

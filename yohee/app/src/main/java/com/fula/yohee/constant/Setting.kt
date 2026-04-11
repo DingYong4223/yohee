@@ -100,10 +100,11 @@ class Setting {
 
                 mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
                 domStorageEnabled = true
-                setAppCacheEnabled(true)
+                // setAppCacheEnabled/setAppCachePath removed in API 33
+                // setAppCacheEnabled(true)
+                // setAppCachePath(context.cacheDir.toString())
                 cacheMode = WebSettings.LOAD_DEFAULT
                 setEnableSmoothTransition(true)
-                setAppCachePath(context.cacheDir.toString())
                 saveFormData = true
                 databaseEnabled = true
                 setSupportZoom(true)

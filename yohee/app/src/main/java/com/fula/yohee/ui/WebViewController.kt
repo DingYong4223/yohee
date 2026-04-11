@@ -291,7 +291,7 @@ class WebViewController(private val activity: WebActivity, tabInitializer: TabIn
 
     fun onReceivedTitle(view: WebView?, title: String) {
         view?.let {
-            updateWebInfo(it.url, title)
+            updateWebInfo(it.url ?: "", title)
         }
         EventBus.getDefault().post(SEvent(SEvent.TYPE_NAVI_AND_ALBUM_CHANGE).apply {
             obj = this@WebViewController

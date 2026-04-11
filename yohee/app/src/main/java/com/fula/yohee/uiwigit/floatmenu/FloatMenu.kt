@@ -137,11 +137,6 @@ class FloatMenu(private val context: FulaBaseActivity, private val view: View) :
         setHeight(menuHeight)
     }
 
-    private fun readGroup(attrs: AttributeSet) {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.MenuItem)
-        a.recycle()
-    }
-
     private fun show(v: View? = null) {
         if (isShowing) return
         clickX = context.touchPoint.x

@@ -24,7 +24,7 @@ abstract class BasePage : IMvpView {
     lateinit var mContext: BasePageActivity<*>
     protected lateinit var intent: Intent
     private var container: ViewGroup? = null
-    val title: String by lazy { intent.getStringExtra(BasePage.KEY_TITLE) }
+    val title: String by lazy { "${intent.getStringExtra(BasePage.KEY_TITLE)}" }
     protected val actionBar: ActionBar by lazy { requireNotNull(mContext.supportActionBar) }
 
     protected val layoutInflater: LayoutInflater

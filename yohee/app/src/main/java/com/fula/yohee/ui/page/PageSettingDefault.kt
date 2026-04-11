@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.page_setting_default.view.*
  */
 class PageSettingDefault : BasePage() {
 
-    private val engineUrl: String by lazy { intent.getStringExtra(KEY_ARGS) }
+    private val engineUrl: String? by lazy { intent.getStringExtra(KEY_ARGS) }
 
     override fun initPage(inflater: LayoutInflater, container: ViewGroup) {
         super.initPage(container, R.layout.page_setting_default)

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.StrictMode
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatDelegate
+import com.androidkun.xtablayoutlibrary.BuildConfig
 import com.flurry.android.FlurryAgent
 import com.fula.CLog
 import com.fula.yohee.di.AppComponent
@@ -34,7 +35,7 @@ class YoheeApp : Application() {
                 .withLogLevel(2)
                 .withListener { FlurryAgent.logEvent(FlurryConst.APP_INITED) }
                 .build(this, Config.FLURRY_API_KEY)
-        Thread.getDefaultUncaughtExceptionHandler().let {
+        Thread.getDefaultUncaughtExceptionHandler()?.let {
             Thread.setDefaultUncaughtExceptionHandler { thread, ex ->
                 FileUtils.writeCrashToStorage(ex)
                 it.uncaughtException(thread, ex)

@@ -114,7 +114,7 @@ class TabsManager @Inject constructor(private val searchEngineProvider: SearchEn
             .flattenAsObservable { bundle ->
                 bundle.keySet()
                         .filter { it.startsWith(BUNDLE_KEY) }
-                        .map(bundle::getBundle)
+                        .mapNotNull(bundle::getBundle)
                         .apply {
                             CLog.i("filter count = ${count()}")
                         }

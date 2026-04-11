@@ -44,7 +44,7 @@ class FullscreenWidget(mContext: Context, val floatMenu: FloatMenuWidget, privat
             contentView.apply {
                 val holderW = DeviceUtils.getScreenWidth(mContext) - mContext.resources.getDimension(R.dimen.toolbar_height)
                 val fullsSwitch = findViewById<View>(R.id.fulls_switch)
-                val bottomViewHolder = findViewById<View>(R.id.bottom_view_holder)
+                val bottomViewHolder = findViewById<android.view.ViewGroup>(R.id.bottom_view_holder)
                 CLog.i("fuw = ${fullsSwitch.width}")
                 bottomViewHolder.addView(holderView.apply {
                     removeFromParent()

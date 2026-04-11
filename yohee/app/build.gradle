@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.getkeepsafe.dexcount'
 
@@ -84,6 +85,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
 }
 
 
@@ -159,7 +164,7 @@ dependencies {
     //FlexboxLayout
     //implementation 'com.google.android:flexbox:1.0.0'
     //implementation 'com.shuyu:gsyVideoPlayer-java:7.0.1'
-    compileOnly 'com.github.NanoHttpd.nanohttpd:nanohttpd:master'
+    compileOnly 'com.github.NanoHttpd.nanohttpd:nanohttpd:nanohttpd-project-2.3.1'
 
     //Flurry, Recommended to add Google Play Services
     implementation 'com.google.android.gms:play-services-base:15.0.1'
@@ -180,6 +185,21 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
     kotlinOptions {
         jvmTarget = "17"
         freeCompilerArgs += ["-progressive"]
+    }
+}
+
+// Ensure BuildConfig and R are generated before Kotlin compilation and kapt stubs
+afterEvaluate {
+    def buildConfigTask = tasks.findByName("generateYoheeLiteDebugBuildConfig")
+    def processResTask = tasks.findByName("processYoheeLiteDebugResources")
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach { compileTask ->
+        if (buildConfigTask) compileTask.dependsOn(buildConfigTask)
+        if (processResTask) compileTask.dependsOn(processResTask)
+    }
+    def kaptStubTask = tasks.findByName("kaptGenerateStubsYoheeLiteDebugKotlin")
+    if (kaptStubTask) {
+        if (buildConfigTask) kaptStubTask.dependsOn(buildConfigTask)
+        if (processResTask) kaptStubTask.dependsOn(processResTask)
     }
 }
 

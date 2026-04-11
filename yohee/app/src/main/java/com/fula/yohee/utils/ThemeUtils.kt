@@ -15,6 +15,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import com.fula.util.ViewUnit
 import com.fula.yohee.R
 import java.util.*
+import androidx.appcompat.R as AppCompatR
 
 object ThemeUtils {
 
@@ -22,7 +23,7 @@ object ThemeUtils {
 
     @ColorInt
     fun getPrimaryColor(context: Context): Int {
-        return getColor(context, R.attr.colorPrimary)
+        return getColor(context, AppCompatR.attr.colorPrimary)
     }
 
     @ColorInt
@@ -32,7 +33,7 @@ object ThemeUtils {
 
     @ColorInt
     fun getPrimaryColorDark(context: Context): Int {
-        return getColor(context, R.attr.colorPrimaryDark)
+        return getColor(context, AppCompatR.attr.colorPrimaryDark)
     }
 
     /**
@@ -43,7 +44,7 @@ object ThemeUtils {
      */
     @ColorInt
     fun getAccentColor(context: Context): Int {
-        return getColor(context, R.attr.colorAccent)
+        return getColor(context, AppCompatR.attr.colorAccent)
     }
 
     /**

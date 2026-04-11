@@ -2,6 +2,7 @@ package com.fula.yohee.settings
 
 import android.content.pm.ActivityInfo
 import com.fula.yohee.R
+import com.fula.frame.R as FrameR
 import com.fula.yohee.constant.SCHEME_BOOKMARKS
 import com.fula.yohee.constant.SCHEME_HOMEPAGE
 import com.fula.yohee.constant.SCHEME_URL
@@ -72,7 +73,7 @@ class SettingProvider {
 
         @JvmStatic
         fun provideDynamicBG(): Array<SettingItem> = listOf(
-                SettingItem(R.drawable.ic_back_white, R.string.dynamic_bg).apply { value = R.mipmap.icon_summer },
+                SettingItem(FrameR.drawable.ic_back_white, R.string.dynamic_bg).apply { value = R.mipmap.icon_summer },
                 SettingItem(R.drawable.ic_hand_right, R.string.setting_no).apply { value = UserSetting.NO_VALUE }
         ).toTypedArray()
 

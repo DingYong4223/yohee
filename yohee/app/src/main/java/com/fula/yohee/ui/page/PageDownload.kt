@@ -7,10 +7,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.view.*
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.annotation.MainThread
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.fula.CLog
 import com.fula.base.ToolUtils
 import com.fula.base.ui.video.GSYVideoActivity
@@ -45,9 +49,6 @@ import com.fula.yohee.utils.YoheePermission
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.com_list_item.view.*
-import kotlinx.android.synthetic.main.page_recycle_view_layout_notoolbar.view.*
-import kotlinx.android.synthetic.main.toolbar.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -76,6 +77,8 @@ class PageDownload : BasePageSelect() {
     lateinit var m3u8Downloader: M3U8Downloader
     private val KEY_TITLE by lazy { getString(R.string.hint_title) }
     private val KEY_URL by lazy { getString(R.string.hint_url) }
+    private val toolSetingbar by lazy { mView.findViewById<Toolbar>(R.id.toolSetingbar) }
+    private val recycle_view by lazy { mView.findViewById<RecyclerView>(R.id.recycle_view) }
 
     private val listener = object : DownloadListener {
 
@@ -134,13 +137,12 @@ class PageDownload : BasePageSelect() {
     override fun initPage(inflater: LayoutInflater, container: ViewGroup) {
         super.initPage(container, R.layout.page_recycle_view_layout)
         YoheeApp.injector.inject(this)
-        mContext.setSupportActionBar(mView.toolSetingbar as Toolbar)
+        mContext.setSupportActionBar(toolSetingbar as Toolbar)
         initToolBar(title)
         downloadhandler.addListener(listener)
         m3u8Downloader.registerListener(listener)
-        mView.recycle_view.apply {
+        recycle_view.apply {
             layoutManager = LinearLayoutManager(mContext)
-            isLongPressDragEnabled = true
             adapter = mAdapter
         }
         initData2UI()
@@ -216,7 +218,7 @@ class PageDownload : BasePageSelect() {
                         }
                         downloadsDB.update(item.url, map)
                                 .subscribeOn(dbScheduler)
-                                .subscribeOn(AndroidSchedulers.mainThread())
+                                .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe {
                                     CLog.i("update status = $it")
                                     initData2UI()
@@ -231,7 +233,7 @@ class PageDownload : BasePageSelect() {
 
     private fun updateViewHolderValue(url: String, downed: Long, length: Long) {
         viewMap[url]?.let {
-            it.item_subtitle.text = mContext.getString(R.string.downloading_info, FileUtils.byte2FitMemorySize(downed) + "/" + getFileSizeTxt(length))
+            it.findViewById<android.widget.TextView>(R.id.item_subtitle).text = mContext.getString(R.string.downloading_info, FileUtils.byte2FitMemorySize(downed) + "/" + getFileSizeTxt(length))
             updateProgress(it, if (downed > 0 && length > 0) {
                 (downed * 1.0f / length * 100).toInt()
             } else {
@@ -241,14 +243,16 @@ class PageDownload : BasePageSelect() {
     }
 
     private fun updateProgress(cv: View, progress: Int) {
-        cv.top_progress.visibility = View.VISIBLE
-        cv.top_progress.progress = progress
+        val top_progress = cv.findViewById<ProgressBar>(R.id.top_progress)
+        top_progress.visibility = View.VISIBLE
+        top_progress.progress = progress
     }
 
     private val margin by lazy { ViewUnit.dp2px(5f) }
     override fun initVisit(cv: View) {
         super.initVisit(cv)
-        cv.item_logo_img.apply {
+        val item_logo_img = cv.findViewById<ImageView>(R.id.item_logo_img)
+        item_logo_img.apply {
             (layoutParams as LinearLayout.LayoutParams).apply {
                 leftMargin = margin
                 rightMargin = margin
@@ -259,25 +263,27 @@ class PageDownload : BasePageSelect() {
 
     override fun bindVisit(cv: View, item: SelectModel) {
         super.bindVisit(cv, item)
+        val item_subtitle = cv.findViewById<TextView>(R.id.item_subtitle)
         val model = item.obj
         if (model is DownloadEntry) {
             viewMap[model.url] = cv
             when (model.status) {
                 DownStatus.STATUS_PENDDING -> {
-                    cv.item_subtitle.setText(R.string.download_inqueue)
+                    item_subtitle.setText(R.string.download_inqueue)
                 }
                 DownStatus.STATUS_DOWNLOADING -> {
-                    cv.item_subtitle.text = mContext.getString(R.string.downloading_info, FileUtils.byte2FitMemorySize(model.downed) + "/" + getFileSizeTxt(model.length))
+                    val text = "${mContext.getString(R.string.downloading_info, FileUtils.byte2FitMemorySize(model.downed) + "/" + getFileSizeTxt(model.length))}"
+                    item_subtitle.text = text
                 }
-                DownStatus.STOPPING -> cv.item_subtitle.setText(R.string.is_stopping)
+                DownStatus.STOPPING -> item_subtitle.setText(R.string.is_stopping)
                 DownStatus.STATUS_COMPLETED -> {
-                    cv.item_subtitle.text = FileUtils.byte2FitMemorySize(if (model.length <= 0) model.downed else model.length)
+                    item_subtitle.text = FileUtils.byte2FitMemorySize(if (model.length <= 0) model.downed else model.length)
                 }
                 DownStatus.STATUS_PAUSED -> {
-                    cv.item_subtitle.text = getString(R.string.paused)
+                    item_subtitle.text = getString(R.string.paused)
                 }
                 else -> {
-                    cv.item_subtitle.text = getString(R.string.download_fail)
+                    item_subtitle.text = getString(R.string.download_fail)
                 }
             }
             updateProgress(cv, if (DownStatus.STATUS_COMPLETED == model.status) {

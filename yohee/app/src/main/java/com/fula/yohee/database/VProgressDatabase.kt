@@ -63,7 +63,8 @@ class VProgressDatabase @Inject constructor(
                     put(KEY_URL, md5Url)
                     put(KEY_PROGRESS, progress)
                 }
-                return@use database.insert(TABLE_PROGRESS, null, values)
+                database.insert(TABLE_PROGRESS, null, values)
+                return@use
             }
             var updateValue = ContentValues(1).apply {
                 this.put(KEY_PROGRESS, progress)

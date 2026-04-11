@@ -300,9 +300,9 @@ abstract class WebActivity : BaseActivity(), OnClickListener {
     }
 
     fun onReceivedTitle(view: WebView?, title: String) {
-        view?.url?.let {
-            CLog.i("receiveTitle: ${view.url}, title: $title")
-            updateHistory(title, view.url)
+        view?.url?.let { url ->
+            CLog.i("receiveTitle: $url, title: $title")
+            updateHistory(title, url)
         }
     }
 

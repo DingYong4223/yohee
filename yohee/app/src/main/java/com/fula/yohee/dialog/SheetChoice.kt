@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fula.base.BaseRecycleAdapter
 import com.fula.util.ViewUnit
 import com.fula.yohee.R
+import com.fula.frame.R as FrameR
 import com.fula.yohee.ui.activity.WebActivity
 import com.fula.yohee.uiwigit.floatmenu.FloatMenu
 import com.fula.yohee.uiwigit.floatmenu.FloatMenuItem
@@ -71,7 +72,7 @@ class SheetChoice(context: WebActivity
             }
 
             private val item_content: TextView = cv as TextView
-            private val selDrawable = ContextCompat.getDrawable(context, R.drawable.ic_right)!!.apply {
+            private val selDrawable = ContextCompat.getDrawable(context, FrameR.drawable.ic_right)!!.apply {
                 setBounds(0, 0, intrinsicWidth, intrinsicHeight)
             }
 

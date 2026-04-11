@@ -34,7 +34,7 @@ class PageWeb : BasePage() {
     }
 
     private fun initView() {
-        mView.web_view.loadUrl(url)
+        mView.web_view.loadUrl(url ?: "")
     }
 
     companion object {
